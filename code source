@@ -1,0 +1,98 @@
+#include<stdio.h>
+#include<string.h>
+
+typedef struct {
+  char nom[20];
+  char numero[11];
+  char adressemail[30];
+} contact ;
+
+contact creercontact(const char * name ,const char * number ,const char * mailadress){
+    contact ct ;
+    strcpy( ct.nom , name) ;
+    strcpy (ct.numero , number) ;
+    strcpy (ct.adressemail ,mailadress) ;
+    return ct ;
+}
+
+
+int main (){
+  contact tableau[40];  
+     int n ;
+     printf("entrer votre numero de contact !! \n") ;
+     scanf("%d",&n); 
+  for (int i=0 ; i< n ; i++ ) {
+     char name[20];
+     char number[11];
+     char mailadress[30];
+     printf("entrer votre :nom numero et adresse de contact %d \n", i+1);
+     scanf("%s %s %s", name , number , mailadress);
+     tableau[i] = creercontact(name ,number , mailadress);
+     
+  }
+  printf("listes des contact \n") ;
+
+    for (int i=0 ; i<n ; i++) 
+  {
+    printf("mon contact %d | de nom %s | de numero tel %s | d adresse mail %s \n", i+1 ,tableau[i].nom , tableau[i].numero ,    tableau[i].adressemail);   
+  }
+  
+  
+  
+  printf("you want modify you contact! yes/no\n");
+  char reponse1[30] ;
+  scanf("%s",reponse1);
+  if (strcmp(reponse1,"yes")==0){
+    char contactnom[30];
+    printf("enter your contact to modify");
+    scanf("%s", contactnom) ;
+    int i ;
+    for (i=0  ; i<n ; i++ ){
+      if ( strcmp(tableau[i].nom ,contactnom)==0)
+      {
+        char name[20];
+        char number[11];
+        char mailadress[30];
+        printf("entrer de nouveau votre :nom numero et adresse de contact %d \n", i+1);
+        scanf("%s %s %s", name , number , mailadress);
+        tableau[i] = creercontact(name ,number , mailadress);
+        printf("contact modifié avec succès\n");
+        break ;
+      }
+    }
+    if (i==n){printf("not found!!");} 
+    
+  }
+  else 
+  {
+    printf("aucune modif à faire !") ;
+  }
+
+  printf("you want delete you contact! yes/no\n");
+  char reponse2[30] ;
+  scanf("%s",reponse2);
+  if (strcmp(reponse2,"yes")==0){
+    char contactnom[30];
+    printf("enter your contact to delete");
+    scanf("%s", contactnom) ;
+    int i ;
+    for (i=0  ; i<n ; i++ ){
+      if ( strcmp(tableau[i].nom ,contactnom)==0)
+      {
+        char name[20]="\0";
+        char number[11]="\0";
+        char mailadress[30]="\0";
+        tableau[i] = creercontact(name ,number , mailadress);
+        printf("mon contact suprimé %d | de nom %s | de numero tel %s | d adresse mail %s \n", i+1 , tableau[i].nom , tableau[i].numero , tableau[i].adressemail);
+        break ;
+      }
+    }
+    if (i==n){printf("not found!!");} 
+    
+  }
+  else 
+  {
+    printf("aucune modif à faire !") ;
+  }
+  return 0 ;
+  }
